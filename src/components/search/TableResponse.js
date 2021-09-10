@@ -10,13 +10,15 @@ const TableResponse = ({ data }) => {
           <tr>
             <th>Nombre</th>
             <th>Edad</th>
+            <th>País</th>
           </tr>
         </thead>
         <tbody>
-          {data.map(({ name, age }, index) => (
-            <tr>
+          {data.map(({ name, age, country_id = '' }, index) => (
+            <tr key={index}>
               <td>{name}</td>
-              <td>{age}</td>
+              <td>{age > 0 ? age : 'Sin Resultado'}</td>
+              <td>{country_id}</td>
             </tr>
           ))}
         </tbody>

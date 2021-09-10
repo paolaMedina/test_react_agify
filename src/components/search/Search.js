@@ -14,7 +14,6 @@ export const Search = () => {
 
   const handleChangeCountry = (selectCountry) => {
     setCountry(selectCountry);
-    console.log(`Option selected:`, searchCountry);
   };
   const handleSearch = async (e) => {
     e.preventDefault();
