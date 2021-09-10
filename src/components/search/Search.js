@@ -44,6 +44,7 @@ export const Search = () => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>País</Form.Label>
               <Select name="searchCountry" value={searchCountry} onChange={handleChangeCountry} options={countryData} />
             </Form.Group>
             <Button variant="primary" type="submit">
