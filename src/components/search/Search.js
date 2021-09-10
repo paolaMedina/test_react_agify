@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import Select from 'react-select';
 import { TableResponse } from './TableResponse';
 import { useForm } from '../../hooks/useForm';
 import { getPrediction } from '../../selectors/getPrediction';
+import { countryData } from '../../data/countryData';
 
 export const Search = () => {
   const [result, setResult] = useState([]);
-  const [formValues, handleInputChange] = useForm({
-    searchNames: '',
-    searchCountry: '',
-  });
-  const { searchNames, searchCountry } = formValues;
+  const [searchCountry, setCountry] = useState('');
+  const [formValues, handleInputChange] = useForm({ searchNames: '', searchCountry: '' });
+  const { searchNames } = formValues;
 
+  const handleChangeCountry = (selectCountry) => {
+    setCountry(selectCountry);
+    console.log(`Option selected:`, searchCountry);
+  };
   const handleSearch = async (e) => {
     e.preventDefault();
     const arraySearchNames = searchNames.split(';');
-    setResult(await getPrediction(arraySearchNames, searchCountry));
+    setResult(await getPrediction(arraySearchNames, searchCountry.value));
   };
 
   return (
@@ -40,14 +44,7 @@ export const Search = () => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>País</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="País"
-                name="searchCountry"
-                value={searchCountry}
-                onChange={handleInputChange}
-              />
+              <Select name="searchCountry" value={searchCountry} onChange={handleChangeCountry} options={countryData} />
             </Form.Group>
             <Button variant="primary" type="submit">
               Predecir
@@ -57,7 +54,11 @@ export const Search = () => {
         <Col xs={5}>
           <h4> Resultado </h4>
           <hr />
-          {result.length === 0 && <div className="alert alert-info">Enter o click en el boton </div>}
+          {result.length === 0 && (
+            <div className="alert alert-info">
+              Para ver resultados, ingresa al menos un nombre y dar 'Enter' o click en el boton 'Predecir'{' '}
+            </div>
+          )}
           {result.length > 0 && <TableResponse data={result} />}
         </Col>
       </Row>
