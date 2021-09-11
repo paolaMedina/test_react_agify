@@ -1,6 +1,6 @@
 # Aplicación React, predice la edad de una persona
 
-Esta aplicación se conecta con la API [agify](https://agify.io/), para predecir la edad de una persona, segun el nombre ingresado.
+Esta aplicación se conecta con la API [agify](https://agify.io/), para predecir la edad de una persona, segun el nombre ingresado. La url de acceso a esta app es [https://master.dowh06y23pwrg.amplifyapp.com/](https://master.dowh06y23pwrg.amplifyapp.com/)
 
 ## Ejecutar el proyecto
 
